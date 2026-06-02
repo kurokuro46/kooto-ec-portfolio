@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./page.module.css";
 import { MockProductRepository } from "@/infrastructure/product/mock-repository";
 import { Header } from "./header";
@@ -63,25 +64,55 @@ export default async function Home() {
           </div>
 
           <div className={styles.productGrid}>
-            {products.map((product) => (
-              <article className={styles.productCard} key={product.name}>
-                <div className={styles.productImageWrap}>
-                  <Image
-                    className={styles.productImage}
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
-                  />
-                  <span className={styles.productTag}>{product.tag}</span>
-                  <a className={styles.quickShop} href="#cart">
-                    QUICK SHOP
-                  </a>
-                </div>
-                <h3>{product.name}</h3>
-                <p>{product.price}</p>
-              </article>
-            ))}
+            {products.map((product) => {
+              const firstColor = product.colors[0];
+
+              return (
+                <Link
+                  className={styles.productCard}
+                  href={`/products/${product.slug}`}
+                  key={product.name}
+                  prefetch={false}
+                >
+                  <div className={styles.productImageWrap}>
+                    <Image
+                      className={styles.productImage}
+                      src={firstColor.image}
+                      alt={`${product.name} ${firstColor.name}`}
+                      fill
+                      sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
+                    />
+                    <span className={styles.quickShop}>VIEW DETAILS</span>
+                  </div>
+                  <div
+                    className={styles.colorVariation}
+                    aria-label={`${product.name} color variations`}
+                  >
+                    {product.colors.map((color, index) => (
+                      <span
+                        className={`${styles.colorOption} ${
+                          index === 0 ? styles.activeColorOption : ""
+                        }`}
+                        key={color.name}
+                        title={color.name}
+                      >
+                        <span
+                          className={styles.colorSwatch}
+                          style={{ backgroundColor: color.value }}
+                          aria-hidden="true"
+                        />
+                        <span className={styles.visuallyHidden}>
+                          {color.name}
+                          {index === 0 ? " shown" : ""}
+                        </span>
+                      </span>
+                    ))}
+                  </div>
+                  <h3>{product.name}</h3>
+                  <p>{product.price}</p>
+                </Link>
+              );
+            })}
           </div>
         </section>
 

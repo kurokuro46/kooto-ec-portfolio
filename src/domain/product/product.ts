@@ -1,6 +1,19 @@
+export interface ProductColor {
+  name: string;
+  value: string;
+  image: string;
+}
+
+export interface ProductSize {
+  label: string;
+  range: string;
+}
+
 export interface Product {
   name: string;
+  slug: string;
   price: string;
-  tag: string;
-  image: string;
+  description: string;
+  sizes: ProductSize[];
+  colors: ProductColor[];
 }

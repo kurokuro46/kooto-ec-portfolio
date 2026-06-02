@@ -1,31 +1,97 @@
 import { Product } from "@/domain/product/product";
 import { ProductRepository } from "@/domain/product/repository";
 
-// 元のpage.tsxにあったデータをここに移行
+const sockSizes = [
+  {
+    label: "S",
+    range: "22-24cm",
+  },
+  {
+    label: "M",
+    range: "25-27cm",
+  },
+];
+
 const mockProducts: Product[] = [
   {
-    name: "Wool Heavy Rib - Ecru",
-    price: "¥3,520 (税込)",
-    tag: "WOOL MIX",
-    image: "/images/products/wool-heavy-rib-ecru.png",
+    name: "ANKLET",
+    slug: "anklet",
+    description:
+      "さらりと軽い履き心地で、足首まわりをやさしく包む短め丈のソックス。室内でも外出でも使いやすい、毎日のための一足です。",
+    sizes: sockSizes,
+    price: "¥1,200 (税込)",
+    colors: [
+      {
+        name: "Beige",
+        value: "#d9c2a4",
+        image: "/images/products/anklet_beige.jpg",
+      },
+      {
+        name: "Brown",
+        value: "#7b5238",
+        image: "/images/products/anklet_brown.jpg",
+      },
+      {
+        name: "Gray",
+        value: "#8f8d87",
+        image: "/images/products/anklet_gray.jpg",
+      },
+    ],
   },
   {
-    name: "Cotton Cloud - Charcoal",
-    price: "¥2,860 (税込)",
-    tag: "COTTON MIX",
-    image: "/images/products/cotton-cloud-charcoal.png",
+    name: "SHORT",
+    slug: "short",
+    description:
+      "ふっくらとした編み地が足を包み込む、定番のショート丈。締め付けを抑えながら、素肌に心地よい温度感を届けます。",
+    sizes: sockSizes,
+    price: "¥1,850 (税込)",
+    colors: [
+      {
+        name: "Beige",
+        value: "#d8c4a7",
+        image: "/images/products/short_beige.jpg",
+      },
+      {
+        name: "Brown",
+        value: "#8a5b40",
+        image: "/images/products/short_brown.jpg",
+      },
+      {
+        name: "Gray",
+        value: "#8b8a86",
+        image: "/images/products/short_gray.jpg",
+      },
+    ],
   },
   {
-    name: "Silk Blend Pile - Mocha",
-    price: "¥4,400 (税込)",
-    tag: "PREMIUM LINE",
-    image: "/images/products/silk-blend-pile-mocha.png",
+    name: "CREW",
+    slug: "crew",
+    description:
+      "足元からすねまであたたかく包むクルー丈。ゆったりとしたリブと柔らかな肌あたりで、日常の動きに自然になじみます。",
+    sizes: sockSizes,
+    price: "¥2,140 (税込)",
+    colors: [
+      {
+        name: "Beige",
+        value: "#d7c3a4",
+        image: "/images/products/crew_beige.jpg",
+      },
+      {
+        name: "Khaki",
+        value: "#777258",
+        image: "/images/products/crew_khaki.jpg",
+      },
+      {
+        name: "Pink",
+        value: "#d7aaa6",
+        image: "/images/products/crew_pink.jpg",
+      },
+    ],
   },
 ];
 
 export class MockProductRepository implements ProductRepository {
   async findAll(): Promise<Product[]> {
-    // 実際のDB接続の代わりに、少しだけ遅延（擬似ネットワーク通信）を入れて返すとよりリアルになります
     return mockProducts;
   }
 }

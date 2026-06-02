@@ -3,10 +3,18 @@
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
-export function Header() {
+interface HeaderProps {
+  alwaysVisible?: boolean;
+}
+
+export function Header({ alwaysVisible = false }: HeaderProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (alwaysVisible) {
+      return;
+    }
+
     const updateVisibility = () => {
       setIsVisible(window.scrollY > 8);
     };
@@ -17,11 +25,13 @@ export function Header() {
     return () => {
       window.removeEventListener("scroll", updateVisibility);
     };
-  }, []);
+  }, [alwaysVisible]);
 
   return (
     <header
-      className={`${styles.header} ${isVisible ? styles.headerVisible : ""}`}
+      className={`${styles.header} ${
+        alwaysVisible || isVisible ? styles.headerVisible : ""
+      }`}
     >
       <nav className={styles.nav} aria-label="Main navigation">
         <div className={styles.navLinks}>

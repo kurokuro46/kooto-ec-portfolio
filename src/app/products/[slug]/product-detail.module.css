@@ -1,0 +1,353 @@
+.page {
+  --paper: #fcf9f8;
+  --surface: #f5f1ee;
+  --ink: #384544;
+  --body: #474f4e;
+  --muted: #746b62;
+  --line: rgba(56, 69, 68, 0.16);
+  --accent: #9b6456;
+
+  min-height: 100vh;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.main {
+  padding-top: 72px;
+}
+
+.productShell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.88fr);
+  gap: clamp(32px, 5vw, 72px);
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  padding: 48px 24px 88px;
+}
+
+.gallery {
+  min-width: 0;
+}
+
+.mainImageWrap {
+  position: sticky;
+  top: 104px;
+  aspect-ratio: 0.86;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.productImage,
+.thumbnailImage {
+  object-fit: cover;
+}
+
+.productImage {
+  object-position: center;
+}
+
+.thumbnails {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 88px));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.thumbnailButton {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.thumbnailButton:focus-visible,
+.addButton:focus-visible,
+.swatchButton:focus-visible,
+.quantityStepper button:focus-visible,
+.sizeOption:focus-within {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.thumbnailActive {
+  border-color: var(--ink);
+}
+
+.purchasePanel {
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  gap: 28px;
+  border-left: 1px solid var(--line);
+  padding: 16px 0 0 clamp(28px, 4vw, 56px);
+}
+
+.eyebrow,
+.optionHeader span,
+.price {
+  font-family: var(--font-hanken-grotesk), sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.purchasePanel h1 {
+  margin-top: -14px;
+  font-family: var(--font-sorts-mill-goudy), var(--font-noto-serif-jp), serif;
+  font-size: clamp(48px, 5vw, 76px);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 0;
+}
+
+.price {
+  font-size: 18px;
+}
+
+.description {
+  color: var(--body);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+.optionGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+}
+
+.optionGroup h2,
+.optionGroup legend,
+.quantityRow label {
+  color: var(--ink);
+  font-family: var(--font-noto-serif-jp), serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.optionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.optionHeader span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.swatchButton {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(56, 69, 68, 0.16);
+}
+
+.optionActive {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(56, 69, 68, 0.07);
+}
+
+.sizeOptions {
+  display: grid;
+  gap: 10px;
+}
+
+.sizeOption {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  min-height: 56px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 18px;
+  color: var(--body);
+  background: #fff;
+  cursor: pointer;
+}
+
+.sizeOption input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sizeOptionActive {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: rgba(56, 69, 68, 0.05);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.sizeLabel {
+  font-family: var(--font-hanken-grotesk), sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+}
+
+.sizeRange {
+  color: var(--muted);
+  font-family: var(--font-hanken-grotesk), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+}
+
+.quantityRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 22px 0;
+}
+
+.quantityStepper {
+  display: grid;
+  grid-template-columns: 44px 64px 44px;
+  min-height: 44px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.quantityStepper button,
+.quantityStepper input {
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  text-align: center;
+}
+
+.quantityStepper button {
+  cursor: pointer;
+}
+
+.quantityStepper input {
+  border-right: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  appearance: textfield;
+}
+
+.quantityStepper input::-webkit-outer-spin-button,
+.quantityStepper input::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.addButton {
+  min-height: 58px;
+  border: 0;
+  border-radius: 6px;
+  color: #fff;
+  background: var(--accent);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.addButton:hover {
+  background: #805247;
+  transform: translateY(-1px);
+}
+
+.addedMessage {
+  border: 1px solid rgba(155, 100, 86, 0.24);
+  border-radius: 6px;
+  padding: 13px 16px;
+  color: #5e3c34;
+  background: rgba(155, 100, 86, 0.08);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .main {
+    padding-top: 64px;
+  }
+
+  .productShell {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 24px 20px 72px;
+  }
+
+  .mainImageWrap {
+    position: relative;
+    top: auto;
+    aspect-ratio: 0.9;
+  }
+
+  .purchasePanel {
+    border-left: 0;
+    padding: 0;
+  }
+
+  .purchasePanel h1 {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 460px) {
+  .thumbnails {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .quantityRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .quantityStepper {
+    width: 100%;
+    grid-template-columns: 1fr 1.2fr 1fr;
+  }
+
+  .sizeOption {
+    min-height: 54px;
+  }
+}
