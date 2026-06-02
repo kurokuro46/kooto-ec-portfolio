@@ -1,26 +1,9 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-
-const products = [
-  {
-    name: "Wool Heavy Rib - Ecru",
-    price: "¥3,520 (税込)",
-    tag: "WOOL MIX",
-    image: "/images/products/wool-heavy-rib-ecru.png",
-  },
-  {
-    name: "Cotton Cloud - Charcoal",
-    price: "¥2,860 (税込)",
-    tag: "COTTON MIX",
-    image: "/images/products/cotton-cloud-charcoal.png",
-  },
-  {
-    name: "Silk Blend Pile - Mocha",
-    price: "¥4,400 (税込)",
-    tag: "PREMIUM LINE",
-    image: "/images/products/silk-blend-pile-mocha.png",
-  },
-];
+import { MockProductRepository } from "@/infrastructure/product/mock-repository";
+import { Header } from "./header";
+import { HeroSlideshow } from "./hero-slideshow";
+import { StoryParallaxImage } from "./story-parallax-image";
 
 const footerColumns = [
   {
@@ -33,43 +16,17 @@ const footerColumns = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  // モックリポジトリから商品データを取得
+  const productRepository = new MockProductRepository();
+  const products = await productRepository.findAll();
+
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <nav className={styles.nav} aria-label="Main navigation">
-          <div className={styles.navLinks}>
-            <a className={styles.activeLink} href="#shop">
-              Shop
-            </a>
-            <a href="#story">Story</a>
-            <a href="#about">About</a>
-          </div>
-          <a className={styles.brandMark} href="#" aria-label="KOTOO home">
-            K
-          </a>
-          <a className={styles.cartButton} href="#cart" aria-label="Cart">
-            <span aria-hidden="true" />
-          </a>
-        </nav>
-      </header>
+      <Header />
 
       <main className={styles.main}>
-        <section className={styles.hero} aria-labelledby="hero-title">
-          <Image
-            className={styles.heroImage}
-            src="/images/hero/hero_1.jpg"
-            alt="木のテーブルに置かれた厚手の靴下"
-            fill
-            priority
-            sizes="100vw"
-          />
-          <div className={styles.heroScrim} />
-          <div className={styles.heroCopy}>
-            <p>SOCKS IN NARA</p>
-            <h1 id="hero-title">KOTOO</h1>
-          </div>
-        </section>
+        <HeroSlideshow />
 
         <section className={styles.storySection} id="story">
           <div className={styles.storyGrid}>
@@ -77,37 +34,26 @@ export default function Home() {
               <p className={styles.eyebrow}>OUR PHILOSOPHY</p>
               <h2>ふっくら柔らかな厚み</h2>
               <p className={styles.lead}>
-                MAWAL（マワル）は、奈良の静かな工房で、古い編み機を使い一足ずつ丁寧に仕立てています。効率を追い求めず、あえて「ゆっくり」編み上げることで、糸の間に空気がたっぷりと含まれ、驚くほどの弾力と柔らかさが生まれます。
+                KOOTO（コト）は、奈良の静かな工房で、手作業で丁寧に仕立てています。効率を追い求めず、あえて「ゆっくり」編み上げることで、糸の間に空気が含まれ、弾力と柔らかさが生まれます。
               </p>
               <p>
-                足を通した瞬間に感じる、包み込まれるような心地よさ。それは、素材本来の良さを最大限に引き出した、手仕事に近い温もりの証です。
+                足を通した瞬間に感じる、包み込まれるような心地よさ。それは、素材本来の良さを最大限に引き出した証です。
               </p>
               <a className={styles.textButton} href="#about">
                 LEARN OUR STORY
                 <span aria-hidden="true">→</span>
               </a>
             </div>
-            <div className={styles.storyImageWrap}>
-              <Image
-                className={styles.storyImage}
-                src="/images/features/story_素材.jpg"
-                alt="柔らかな編み地の質感"
-                fill
-                sizes="(max-width: 768px) 100vw, 48vw"
-              />
-            </div>
+            <StoryParallaxImage />
           </div>
         </section>
 
         <section className={styles.productsSection} id="shop">
           <div className={styles.sectionHeader}>
             <div>
-              <p className={styles.eyebrow}>SEASONAL SELECTION</p>
-              <h2>Featured Products</h2>
+              <p className={styles.eyebrow}>PRODUCTS</p>
+              <h2>商品</h2>
             </div>
-            <a className={styles.viewAll} href="#products">
-              VIEW ALL PRODUCTS
-            </a>
           </div>
 
           <div className={styles.tabs} aria-label="Product categories">
@@ -139,17 +85,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section className={styles.newsletter} aria-labelledby="newsletter-title">
-          <p className={styles.eyebrow}>JOIN OUR COMMUNITY</p>
-          <h2 id="newsletter-title">日々の暮らしに、一匙の温もりを。</h2>
-          <p>新作の情報や、奈良の工房での製作の様子を定期的にお届けします。</p>
-          <form className={styles.form}>
-            <label className={styles.visuallyHidden} htmlFor="email">
-              メールアドレス
-            </label>
-            <input id="email" type="email" placeholder="メールアドレス" />
-            <button type="submit">登録</button>
-          </form>
+        <section
+          className={styles.newsletter}
+          aria-labelledby="newsletter-title"
+        >
+          <h2 id="newsletter-title">あなたを包む、心地よさ</h2>
         </section>
       </main>
 
@@ -188,16 +128,16 @@ export default function Home() {
             <p>
               奈良県奈良市
               <br />
-              MAWAL Studio
+              KOOTO Studio
             </p>
-            <a className={styles.emailLink} href="mailto:info@mawal.jp">
-              info@mawal.jp
+            <a className={styles.emailLink} href="mailto:info@kooto.jp">
+              info@kooto.jp
             </a>
           </div>
         </div>
 
         <div className={styles.footerBottom}>
-          <p>© 2024 MAWAL Nara. Crafted for Comfort.</p>
+          <p>© 2026 KOOTO Nara. Crafted for Comfort.</p>
           <div>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>

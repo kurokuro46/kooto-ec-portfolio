@@ -31,7 +31,7 @@ const zenKakuGothic = Zen_Kaku_Gothic_New({
 });
 
 export const metadata: Metadata = {
-  title: "KOTOO | Socks in Nara",
+  title: "KOOTO | Socks in Nara",
   description: "奈良から届ける、ふっくらとした時間。",
 };
 

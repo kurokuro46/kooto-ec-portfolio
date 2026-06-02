@@ -23,6 +23,18 @@
   background: rgba(252, 249, 248, 0.82);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition:
+    opacity 2.72s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 2.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.headerVisible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .nav,
@@ -121,10 +133,18 @@
 }
 
 .hero {
+  /* hero画像の拡大アニメーションの開始倍率です。 */
+  --hero-slide-start-scale: 1;
+  /* hero画像の拡大アニメーションの最終倍率です。 中央に向かって拡大します。 */
+  --hero-slide-end-scale: 1.26;
+  /* hero画像が開始倍率から最終倍率まで拡大し続ける時間です。長いほどゆっくり拡大します。 */
+  --hero-slide-zoom-duration: 62s;
+
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 76vh;
+  min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
   background: #8f877c;
 }
@@ -137,11 +157,54 @@
 
 .heroImage {
   object-position: center;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.heroSlideZoom .heroImage {
+  animation: heroImageBloom var(--hero-slide-zoom-duration) linear forwards;
+}
+
+.heroSlides,
+.heroSlide {
+  position: absolute;
+  inset: 0;
+}
+
+.heroSlides {
+  overflow: hidden;
+}
+
+.heroSlide {
+  opacity: 0;
+  /* 画像同士が重なりながら切り替わるフェード時間です。長いほどゆっくり溶けるように変わります。 */
+  transition: opacity 4.8s cubic-bezier(0.33, 1, 0.68, 1);
+  will-change: opacity;
+}
+
+.heroSlideActive {
+  z-index: 1;
+  opacity: 1;
+}
+
+.heroSlidePrevious {
+  opacity: 0;
+}
+
+@keyframes heroImageBloom {
+  from {
+    transform: scale(var(--hero-slide-start-scale));
+  }
+
+  to {
+    transform: scale(var(--hero-slide-end-scale));
+  }
 }
 
 .heroScrim {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.18)),
     radial-gradient(circle at 48% 55%, rgba(0, 0, 0, 0.26), transparent 34%);
@@ -149,11 +212,12 @@
 
 .heroCopy {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   padding: 120px 24px 96px;
   color: #fff;
   text-align: center;
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transform: translateY(-12%);
 }
 
 .heroCopy p,
@@ -254,6 +318,9 @@
 
 .storyImage {
   object-position: center bottom;
+  transform: translate3d(0, var(--story-parallax-y, 0px), 0) scale(1.12);
+  transition: transform 0.08s linear;
+  will-change: transform;
 }
 
 .productsSection {
@@ -531,7 +598,8 @@
 
 @media (max-width: 980px) {
   .hero {
-    min-height: 70vh;
+    min-height: 100vh;
+    min-height: 100svh;
   }
 
   .storyGrid {
@@ -587,7 +655,8 @@
   }
 
   .hero {
-    min-height: 68vh;
+    min-height: 100vh;
+    min-height: 100svh;
   }
 
   .heroImage {
@@ -683,5 +752,20 @@
   .footerBottom div {
     flex-direction: column;
     gap: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroSlide {
+    transition-duration: 1ms;
+  }
+
+  .heroSlideZoom .heroImage {
+    animation: none;
+  }
+
+  .storyImage {
+    transform: none;
+    transition: none;
   }
 }
