@@ -112,6 +112,27 @@ const mockProducts: Product[] = [
       },
     ],
   },
+  {
+    name: "SHOWY CREW",
+    slug: "showy-crew",
+    category: "winter",
+    description:
+      "防縮加工を施したウールをふんだんに使い、ローゲージ機でゆっくりと編み上げたボリュームたっぷりの一足。しっかりとした厚みで足元を包み、非常に暖かく過ごせます。",
+    sizes: sockSizes,
+    price: "¥2,400 (税込)",
+    colors: [
+      {
+        name: "Brown",
+        value: "#8b5a3c",
+        image: "/images/products/showy_crew_brown.jpg",
+      },
+      {
+        name: "Ivory",
+        value: "#eee6d8",
+        image: "/images/products/showy_crew_ivory.jpg",
+      },
+    ],
+  },
 ];
 
 export class MockProductRepository implements ProductRepository {

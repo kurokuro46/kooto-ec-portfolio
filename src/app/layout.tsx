@@ -33,6 +33,9 @@ const zenKakuGothic = Zen_Kaku_Gothic_New({
 export const metadata: Metadata = {
   title: "KOOTO | Socks in Nara",
   description: "奈良から届ける、ふっくらとした時間。",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

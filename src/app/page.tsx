@@ -1,20 +1,11 @@
+import Image from "next/image";
 import styles from "./page.module.css";
 import { MockProductRepository } from "@/infrastructure/product/mock-repository";
 import { Header } from "./header";
 import { HeroSlideshow } from "./hero-slideshow";
 import { ProductSection } from "./product-section";
+import { ScrollRevealText } from "./scroll-reveal-text";
 import { StoryParallaxImage } from "./story-parallax-image";
-
-const footerColumns = [
-  {
-    title: "Collections",
-    links: ["New Arrivals", "Wool Series", "Cotton Series", "Gift Sets"],
-  },
-  {
-    title: "Information",
-    links: ["Materiality", "Stockists", "Shipping", "Returns"],
-  },
-];
 
 export default async function Home() {
   // モックリポジトリから商品データを取得
@@ -31,18 +22,21 @@ export default async function Home() {
         <section className={styles.storySection} id="story">
           <div className={styles.storyGrid}>
             <div className={styles.storyCopy}>
-              <p className={styles.eyebrow}>OUR PHILOSOPHY</p>
-              <h2>ふっくら柔らかな厚み</h2>
-              <p className={styles.lead}>
-                KOOTO（コト）は、奈良の静かな工房で、手作業で丁寧に仕立てています。効率を追い求めず、あえて「ゆっくり」編み上げることで、糸の間に空気が含まれ、弾力と柔らかさが生まれます。
-              </p>
-              <p>
-                足を通した瞬間に感じる、包み込まれるような心地よさ。それは、素材本来の良さを最大限に引き出した証です。
-              </p>
-              <a className={styles.textButton} href="#about">
-                LEARN OUR STORY
-                <span aria-hidden="true">→</span>
-              </a>
+              <ScrollRevealText
+                as="p"
+                className={styles.eyebrow}
+                text="OUR POLICY"
+              />
+              <ScrollRevealText as="h2" text="ふっくら柔らかな厚み" />
+              <ScrollRevealText
+                as="p"
+                className={styles.lead}
+                text="KOOTO（コト）は、奈良の静かな工房で、手作業で丁寧に仕立てています。効率を追い求めず、あえて「ゆっくり」編み上げることで、糸の間に空気が含まれ、弾力と柔らかさが生まれます。"
+              />
+              <ScrollRevealText
+                as="p"
+                text="足を通した瞬間に感じる、包み込まれるような心地よさ。それは、素材本来の良さを最大限に引き出した証です。"
+              />
             </div>
             <StoryParallaxImage />
           </div>
@@ -51,8 +45,12 @@ export default async function Home() {
         <section className={styles.productsSection} id="shop">
           <div className={styles.sectionHeader}>
             <div>
-              <p className={styles.eyebrow}>PRODUCTS</p>
-              <h2>商品</h2>
+              <ScrollRevealText
+                as="p"
+                className={styles.eyebrow}
+                text="PRODUCTS"
+              />
+              <ScrollRevealText as="h2" text="商品" />
             </div>
           </div>
 
@@ -60,42 +58,37 @@ export default async function Home() {
         </section>
 
         <section
-          className={styles.newsletter}
-          aria-labelledby="newsletter-title"
+          className={styles.conceptSection}
+          id="concept"
+          aria-labelledby="concept-title"
         >
-          <h2 id="newsletter-title">あなたを包む、心地よさ</h2>
+          <ScrollRevealText
+            as="h2"
+            id="concept-title"
+            text="あなたを包む、心地よさ"
+          />
+          <div className={styles.conceptImageWrap}>
+            <Image
+              className={styles.conceptImage}
+              src="/images/features/concept.jpg"
+              alt=""
+              fill
+              sizes="100vw"
+            />
+          </div>
         </section>
       </main>
 
       <footer className={styles.footer} id="about">
         <div className={styles.footerGrid}>
           <div className={styles.footerBrand}>
-            <div className={styles.footerLogo}>K</div>
             <p>
               奈良から届ける、
               <br />
-              ふっくらとした時間。
+              ふっくらとした厚み。
             </p>
-            <div className={styles.socialLinks} aria-label="Social links">
-              <a href="#instagram" aria-label="Instagram">
-                ◎
-              </a>
-              <a href="#mail" aria-label="Email">
-                ✉
-              </a>
-            </div>
+            <div className={styles.socialLinks} aria-label="Social links"></div>
           </div>
-
-          {footerColumns.map((column) => (
-            <div className={styles.footerColumn} key={column.title}>
-              <h2>{column.title}</h2>
-              {column.links.map((link) => (
-                <a href="#" key={link}>
-                  {link}
-                </a>
-              ))}
-            </div>
-          ))}
 
           <div className={styles.footerColumn}>
             <h2>Contact</h2>
@@ -112,10 +105,6 @@ export default async function Home() {
 
         <div className={styles.footerBottom}>
           <p>© 2026 KOOTO Nara. Crafted for Comfort.</p>
-          <div>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-          </div>
         </div>
       </footer>
     </div>

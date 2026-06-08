@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
@@ -34,16 +35,10 @@ export function Header({ alwaysVisible = false }: HeaderProps) {
       }`}
     >
       <nav className={styles.nav} aria-label="Main navigation">
-        <div className={styles.navLinks}>
-          <a className={styles.activeLink} href="#shop">
-            Shop
-          </a>
-          <a href="#story">Story</a>
-          <a href="#about">About</a>
-        </div>
-        <a className={styles.brandMark} href="#" aria-label="KOOTO home">
-          K
-        </a>
+        <Link className={styles.siteBrand} href="/">
+          <span className={styles.siteBrandName}>KOOTO</span>
+          <span> | Socks in Nara</span>
+        </Link>
         <a className={styles.cartButton} href="#cart" aria-label="Cart">
           <span aria-hidden="true" />
         </a>

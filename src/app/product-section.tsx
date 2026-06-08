@@ -62,7 +62,7 @@ export function ProductSection({ products }: ProductSectionProps) {
                   fill
                   sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
                 />
-                <span className={styles.quickShop}>VIEW DETAILS</span>
+                <span className={styles.quickShop}>詳細を見る</span>
               </div>
               <div
                 className={styles.colorVariation}
