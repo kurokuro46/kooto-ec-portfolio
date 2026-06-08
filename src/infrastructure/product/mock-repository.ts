@@ -16,6 +16,7 @@ const mockProducts: Product[] = [
   {
     name: "ANKLET",
     slug: "anklet",
+    category: "basic",
     description:
       "さらりと軽い履き心地で、足首まわりをやさしく包む短め丈のソックス。室内でも外出でも使いやすい、毎日のための一足です。",
     sizes: sockSizes,
@@ -41,6 +42,7 @@ const mockProducts: Product[] = [
   {
     name: "SHORT",
     slug: "short",
+    category: "basic",
     description:
       "ふっくらとした編み地が足を包み込む、定番のショート丈。締め付けを抑えながら、素肌に心地よい温度感を届けます。",
     sizes: sockSizes,
@@ -66,6 +68,7 @@ const mockProducts: Product[] = [
   {
     name: "CREW",
     slug: "crew",
+    category: "basic",
     description:
       "足元からすねまであたたかく包むクルー丈。ゆったりとしたリブと柔らかな肌あたりで、日常の動きに自然になじみます。",
     sizes: sockSizes,
@@ -85,6 +88,27 @@ const mockProducts: Product[] = [
         name: "Pink",
         value: "#d7aaa6",
         image: "/images/products/crew_pink.jpg",
+      },
+    ],
+  },
+  {
+    name: "SUNNY ANKLET",
+    slug: "sunny-anklet",
+    category: "summer",
+    description:
+      "麻を多めに入れて吸水性と通気性を高めた、夏に心地よいアンクレットソックス。さらりと涼しい肌触りで、素足に近い軽やかさを楽しめます。",
+    sizes: sockSizes,
+    price: "¥1,500 (税込)",
+    colors: [
+      {
+        name: "Blue",
+        value: "#6fa9cf",
+        image: "/images/products/sunny_anklet_blue.jpg",
+      },
+      {
+        name: "Orange",
+        value: "#df8f50",
+        image: "/images/products/sunny_anklet_orange.jpg",
       },
     ],
   },

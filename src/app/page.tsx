@@ -1,9 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
 import styles from "./page.module.css";
 import { MockProductRepository } from "@/infrastructure/product/mock-repository";
 import { Header } from "./header";
 import { HeroSlideshow } from "./hero-slideshow";
+import { ProductSection } from "./product-section";
 import { StoryParallaxImage } from "./story-parallax-image";
 
 const footerColumns = [
@@ -57,63 +56,7 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className={styles.tabs} aria-label="Product categories">
-            <button className={styles.activeTab}>ベーシック</button>
-            <button>夏用</button>
-            <button>冬用</button>
-          </div>
-
-          <div className={styles.productGrid}>
-            {products.map((product) => {
-              const firstColor = product.colors[0];
-
-              return (
-                <Link
-                  className={styles.productCard}
-                  href={`/products/${product.slug}`}
-                  key={product.name}
-                  prefetch={false}
-                >
-                  <div className={styles.productImageWrap}>
-                    <Image
-                      className={styles.productImage}
-                      src={firstColor.image}
-                      alt={`${product.name} ${firstColor.name}`}
-                      fill
-                      sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
-                    />
-                    <span className={styles.quickShop}>VIEW DETAILS</span>
-                  </div>
-                  <div
-                    className={styles.colorVariation}
-                    aria-label={`${product.name} color variations`}
-                  >
-                    {product.colors.map((color, index) => (
-                      <span
-                        className={`${styles.colorOption} ${
-                          index === 0 ? styles.activeColorOption : ""
-                        }`}
-                        key={color.name}
-                        title={color.name}
-                      >
-                        <span
-                          className={styles.colorSwatch}
-                          style={{ backgroundColor: color.value }}
-                          aria-hidden="true"
-                        />
-                        <span className={styles.visuallyHidden}>
-                          {color.name}
-                          {index === 0 ? " shown" : ""}
-                        </span>
-                      </span>
-                    ))}
-                  </div>
-                  <h3>{product.name}</h3>
-                  <p>{product.price}</p>
-                </Link>
-              );
-            })}
-          </div>
+          <ProductSection products={products} />
         </section>
 
         <section

@@ -12,6 +12,7 @@ export interface ProductSize {
 export interface Product {
   name: string;
   slug: string;
+  category: "basic" | "summer" | "winter";
   price: string;
   description: string;
   sizes: ProductSize[];
