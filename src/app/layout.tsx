@@ -6,6 +6,7 @@ import {
   Zen_Kaku_Gothic_New,
 } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "./cart-provider";
 
 const hankenGrotesk = Hanken_Grotesk({
   variable: "--font-hanken-grotesk",
@@ -48,7 +49,9 @@ export default function RootLayout({
       lang="ja"
       className={`${hankenGrotesk.variable} ${notoSerifJp.variable} ${sortsMillGoudy.variable} ${zenKakuGothic.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <CartProvider>{children}</CartProvider>
+      </body>
     </html>
   );
 }

@@ -103,6 +103,7 @@
 }
 
 .cartButton {
+  position: relative;
   justify-self: end;
   display: grid;
   place-items: center;
@@ -110,7 +111,25 @@
   height: 35px;
 }
 
-.cartButton span {
+.cartButton .cartBadge {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: -3px;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  color: #fff;
+  background: #c94343;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.cartIcon {
   position: relative;
   width: 15px;
   height: 17px;
@@ -118,7 +137,7 @@
   border-radius: 2px;
 }
 
-.cartButton span::before {
+.cartIcon::before {
   position: absolute;
   top: -6px;
   left: 3px;
@@ -403,6 +422,12 @@
   background: var(--surface);
 }
 
+.productImageZoom {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.5s ease;
+}
+
 .productImage {
   object-position: center;
   transition: transform 0.4s ease;
@@ -421,15 +446,17 @@
   border-radius: 6px;
   opacity: 0;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(252, 249, 248, 0.62);
   box-shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(2px);
-  transform: translateY(12px);
+  backdrop-filter: blur(6px);
+  filter: blur(2px);
+  transform: translateY(16px) scale(0.97);
   transition:
-    opacity 0.24s ease,
-    transform 0.24s ease;
+    opacity 0.5s ease,
+    filter 0.45s ease,
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   white-space: nowrap;
 }
 
@@ -439,17 +466,23 @@
   border-top: 1.5px solid currentColor;
   border-right: 1.5px solid currentColor;
   content: "";
-  transform: rotate(45deg);
+  transform: translateY(-1px) rotate(45deg);
 }
 
 .productCard:hover .productImage {
-  transform: scale(1.035);
+  transform: scale(1.05);
+}
+
+.productCard:hover .productImageZoom {
+  transform: scale(1.048);
+  transition: transform 5.6s linear 0.4s;
 }
 
 .productCard:hover .quickShop,
 .productCard:focus-visible .quickShop {
   opacity: 1;
-  transform: translateY(0);
+  filter: blur(0);
+  transform: translateY(0) scale(1);
 }
 
 .productCard:focus-visible {
@@ -768,6 +801,7 @@
     right: 18%;
     left: 18%;
     opacity: 1;
+    filter: none;
     transform: none;
   }
 
@@ -820,6 +854,20 @@
   }
 
   .storyImage {
+    transform: none;
+    transition: none;
+  }
+
+  .quickShop {
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  .productImageZoom,
+  .productImage,
+  .productCard:hover .productImageZoom,
+  .productCard:hover .productImage {
     transform: none;
     transition: none;
   }

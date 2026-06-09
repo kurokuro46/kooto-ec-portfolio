@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useCart } from "./cart-provider";
 import styles from "./page.module.css";
 
 interface HeaderProps {
@@ -10,6 +11,7 @@ interface HeaderProps {
 
 export function Header({ alwaysVisible = false }: HeaderProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const { itemCount } = useCart();
 
   useEffect(() => {
     if (alwaysVisible) {
@@ -39,9 +41,14 @@ export function Header({ alwaysVisible = false }: HeaderProps) {
           <span className={styles.siteBrandName}>KOOTO</span>
           <span> | Socks in Nara</span>
         </Link>
-        <a className={styles.cartButton} href="#cart" aria-label="Cart">
-          <span aria-hidden="true" />
-        </a>
+        <Link className={styles.cartButton} href="/checkout" aria-label="カート">
+          {itemCount > 0 ? (
+            <span className={styles.cartBadge} aria-label={`${itemCount}点`}>
+              {itemCount > 9 ? "9+" : itemCount}
+            </span>
+          ) : null}
+          <span className={styles.cartIcon} aria-hidden="true" />
+        </Link>
       </nav>
     </header>
   );

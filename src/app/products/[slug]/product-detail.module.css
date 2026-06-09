@@ -68,7 +68,7 @@
 .addButton:focus-visible,
 .swatchButton:focus-visible,
 .quantityStepper button:focus-visible,
-.sizeOption:focus-within {
+.sizeOption:has(input:focus-visible) {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
@@ -212,7 +212,6 @@
   border-color: var(--ink);
   color: var(--ink);
   background: rgba(56, 69, 68, 0.05);
-  box-shadow: inset 0 0 0 1px var(--ink);
 }
 
 .sizeLabel {
@@ -283,7 +282,7 @@
   color: #fff;
   background: var(--accent);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition:
     background-color 0.2s ease,
@@ -293,6 +292,118 @@
 .addButton:hover {
   background: #805247;
   transform: translateY(-1px);
+}
+
+.addButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
+}
+
+.loadingOverlay,
+.modalBackdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.loadingOverlay {
+  color: #fff;
+  background: rgba(43, 50, 49, 0.76);
+  backdrop-filter: blur(5px);
+}
+
+.loadingOverlay p {
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.loadingSpinner {
+  width: 52px;
+  height: 52px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: cartLoading 0.8s linear infinite;
+}
+
+@keyframes cartLoading {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.modalBackdrop {
+  background: rgba(43, 50, 49, 0.48);
+  backdrop-filter: blur(4px);
+}
+
+.addedModal {
+  width: min(100%, 480px);
+  border-radius: 8px;
+  padding: 44px;
+  background: var(--paper);
+  box-shadow: 0 24px 72px rgba(24, 31, 30, 0.22);
+  text-align: center;
+}
+
+.successMark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--accent);
+  font-size: 22px;
+}
+
+.modalEyebrow {
+  color: var(--muted);
+  font-family: var(--font-hanken-grotesk), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.addedModal h2 {
+  margin-top: 8px;
+  font-family: var(--font-noto-serif-jp), serif;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.addedModal > p:last-of-type {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.modalActions {
+  display: grid;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.modalActions button {
+  min-height: 52px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  color: #fff;
+  background: var(--accent);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.modalActions .secondaryAction {
+  color: var(--ink);
+  background: transparent;
 }
 
 .addedMessage {
@@ -333,6 +444,10 @@
 }
 
 @media (max-width: 460px) {
+  .addedModal {
+    padding: 36px 22px 24px;
+  }
+
   .thumbnails {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

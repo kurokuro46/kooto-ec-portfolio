@@ -31,7 +31,7 @@ export default async function Home() {
               <ScrollRevealText
                 as="p"
                 className={styles.lead}
-                text="KOOTO（コト）は、奈良の静かな工房で、手作業で丁寧に仕立てています。効率を追い求めず、あえて「ゆっくり」編み上げることで、糸の間に空気が含まれ、弾力と柔らかさが生まれます。"
+                text="KOOTOは、奈良の静かな工房で、手作業で丁寧に仕立てています。効率を追い求めず、あえて「ゆっくり」編み上げることで、糸の間に空気が含まれ、弾力と柔らかさが生まれます。"
               />
               <ScrollRevealText
                 as="p"
@@ -104,7 +104,8 @@ export default async function Home() {
         </div>
 
         <div className={styles.footerBottom}>
-          <p>© 2026 KOOTO Nara. Crafted for Comfort.</p>
+          <p>© 2026 KOOTO Nara. </p>
+          <p>2026 R.K. portfolio.</p>
         </div>
       </footer>
     </div>

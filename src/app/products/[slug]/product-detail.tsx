@@ -1,24 +1,15 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
+import { useCart } from "@/app/cart-provider";
 import type { Product } from "@/domain/product/product";
 import styles from "./product-detail.module.css";
 
-interface ProductDetailProps {
-  product: Product;
-}
-
-interface CartItem {
-  productSlug: string;
-  productName: string;
-  color: string;
-  size: string;
-  quantity: number;
-  price: string;
-}
-
-export function ProductDetail({ product }: ProductDetailProps) {
+export function ProductDetail({ product }: { product: Product }) {
+  const router = useRouter();
+  const { addItem } = useCart();
   const [selectedColorName, setSelectedColorName] = useState(
     product.colors[0]?.name ?? "",
   );
@@ -26,7 +17,8 @@ export function ProductDetail({ product }: ProductDetailProps) {
     product.sizes[0]?.label ?? "",
   );
   const [quantity, setQuantity] = useState(1);
-  const [addedMessage, setAddedMessage] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
+  const [isAddedModalOpen, setIsAddedModalOpen] = useState(false);
 
   const selectedColor = useMemo(
     () =>
@@ -34,7 +26,6 @@ export function ProductDetail({ product }: ProductDetailProps) {
       product.colors[0],
     [product.colors, selectedColorName],
   );
-
   const selectedSize = useMemo(
     () =>
       product.sizes.find((size) => size.label === selectedSizeLabel) ??
@@ -42,26 +33,20 @@ export function ProductDetail({ product }: ProductDetailProps) {
     [product.sizes, selectedSizeLabel],
   );
 
-  const addToCart = () => {
-    const sizeText = `${selectedSize.label} (${selectedSize.range})`;
-    const item: CartItem = {
+  const addToCart = async () => {
+    setIsAdding(true);
+    await new Promise((resolve) => window.setTimeout(resolve, 850));
+    addItem({
       productSlug: product.slug,
       productName: product.name,
       color: selectedColor.name,
-      size: sizeText,
+      size: `${selectedSize.label} (${selectedSize.range})`,
       quantity,
       price: product.price,
-    };
-
-    const existing = window.localStorage.getItem("kooto-cart");
-    const cartItems: CartItem[] = existing ? JSON.parse(existing) : [];
-    window.localStorage.setItem(
-      "kooto-cart",
-      JSON.stringify([...cartItems, item]),
-    );
-    setAddedMessage(
-      `${product.name} / ${selectedColor.name} / ${sizeText} をカートに追加しました。`,
-    );
+      image: selectedColor.image,
+    });
+    setIsAdding(false);
+    setIsAddedModalOpen(true);
   };
 
   return (
@@ -77,8 +62,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
             priority
           />
         </div>
-
-        <div className={styles.thumbnails} aria-label="Color preview">
+        <div className={styles.thumbnails} aria-label="カラープレビュー">
           {product.colors.map((color) => (
             <button
               className={`${styles.thumbnailButton} ${
@@ -187,16 +171,55 @@ export function ProductDetail({ product }: ProductDetailProps) {
           </div>
         </div>
 
-        <button className={styles.addButton} type="button" onClick={addToCart}>
+        <button
+          className={styles.addButton}
+          type="button"
+          onClick={addToCart}
+          disabled={isAdding}
+        >
           カートに追加する
         </button>
-
-        {addedMessage ? (
-          <p className={styles.addedMessage} role="status">
-            {addedMessage}
-          </p>
-        ) : null}
       </section>
+
+      {isAdding ? (
+        <div className={styles.loadingOverlay} role="status" aria-live="polite">
+          <span className={styles.loadingSpinner} aria-hidden="true" />
+          <p>カートに追加しています</p>
+        </div>
+      ) : null}
+
+      {isAddedModalOpen ? (
+        <div className={styles.modalBackdrop}>
+          <section
+            className={styles.addedModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="added-modal-title"
+          >
+            <span className={styles.successMark} aria-hidden="true">
+              ✓
+            </span>
+            <p className={styles.modalEyebrow}>ADDED TO CART</p>
+            <h2 id="added-modal-title">カートに追加しました</h2>
+            <p>
+              {product.name} / {selectedColor.name} / {selectedSize.label} /{" "}
+              {quantity}点
+            </p>
+            <div className={styles.modalActions}>
+              <button type="button" onClick={() => router.push("/checkout")}>
+                購入に進む
+              </button>
+              <button
+                className={styles.secondaryAction}
+                type="button"
+                onClick={() => router.push("/#shop")}
+              >
+                買い物を続ける
+              </button>
+            </div>
+          </section>
+        </div>
+      ) : null}
     </div>
   );
 }

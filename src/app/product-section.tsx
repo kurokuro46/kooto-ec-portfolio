@@ -55,13 +55,15 @@ export function ProductSection({ products }: ProductSectionProps) {
               prefetch={false}
             >
               <div className={styles.productImageWrap}>
-                <Image
-                  className={styles.productImage}
-                  src={firstColor.image}
-                  alt={`${product.name} ${firstColor.name}`}
-                  fill
-                  sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
-                />
+                <div className={styles.productImageZoom}>
+                  <Image
+                    className={styles.productImage}
+                    src={firstColor.image}
+                    alt={`${product.name} ${firstColor.name}`}
+                    fill
+                    sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
+                  />
+                </div>
                 <span className={styles.quickShop}>詳細を見る</span>
               </div>
               <div
