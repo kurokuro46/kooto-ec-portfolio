@@ -4,7 +4,7 @@
 
 奈良の靴下ブランド「KOOTO」を題材に、商品の魅力が伝わるデザインと、目的の商品を選びやすい体験を目指しました。制作ではコードを直接書かず、自然言語による指示のみでデザインから実装まで行っています。
 
-**公開サイト:** [https://ec-kotoo.vercel.app](https://ec-kotoo.vercel.app)
+**公開サイト:** [https://ec-kooto.vercel.app](https://ec-kooto.vercel.app)
 
 ## コンセプト
 
