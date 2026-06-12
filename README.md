@@ -6,6 +6,8 @@
 
 **公開サイト:** [https://ec-kooto.vercel.app](https://ec-kooto.vercel.app)
 
+![KOOTO ECサイトのトップページ](public/screenshots/homepage.png)
+
 ## コンセプト
 
 > ゆっくり編むことで生まれる、ふっくら柔らかな厚み

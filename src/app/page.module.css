@@ -56,7 +56,6 @@
 }
 
 .nav a,
-.viewAll,
 .footerBottom,
 .quickShop,
 .tabs button {
@@ -79,27 +78,9 @@
   font-weight: 400;
 }
 
-.activeLink,
-.viewAll,
 .emailLink {
   border-bottom: 1px solid var(--ink);
   padding-bottom: 5px;
-}
-
-.brandMark,
-.footerLogo {
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(56, 69, 68, 0.18);
-  border-radius: 50%;
-  color: var(--ink);
-  font-family: var(--font-sorts-mill-goudy), serif;
-}
-
-.brandMark {
-  width: 40px;
-  height: 40px;
-  font-size: 25px;
 }
 
 .cartButton {
@@ -599,12 +580,6 @@
   padding-bottom: 80px;
 }
 
-.footerLogo {
-  width: 32px;
-  height: 32px;
-  font-size: 20px;
-}
-
 .footerBrand,
 .footerColumn {
   display: flex;
@@ -734,13 +709,6 @@
     overflow: hidden;
     font-size: 12px;
     text-overflow: ellipsis;
-  }
-
-  .brandMark {
-    justify-self: center;
-    width: 34px;
-    height: 34px;
-    font-size: 21px;
   }
 
   .hero {
