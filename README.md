@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KOOTO EC Site
 
-## Getting Started
+生成AIを活用したバイブコーディングによって制作した、ポートフォリオ用のECサイトです。
 
-First, run the development server:
+奈良の靴下ブランド「KOOTO」を題材に、商品の魅力が伝わるデザインと、目的の商品を選びやすい体験を目指しました。制作ではコードを直接書かず、自然言語による指示のみでデザインから実装まで行っています。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 制作プロセス
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| 工程 | 使用ツール | 内容 |
+| --- | --- | --- |
+| コンセプト設計・デザイン制作 | Stitch | ブランドコンセプトをもとに、サイトのデザインと画像を生成 |
+| デザイン調整 | Figma | 生成されたデザインの細かな修正 |
+| コーディング | Codex | 自然言語で指示を出し、サイトを実装 |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## コンセプト
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> ゆっくり編むことで生まれる、ふっくら柔らかな厚み
 
-## Learn More
+奈良の靴下ブランド「KOOTO」が持つ、丁寧なものづくりと靴下の柔らかな質感を表現しました。
 
-To learn more about Next.js, take a look at the following resources:
+サイト全体にも柔らかさを感じられるよう、要素が穏やかに現れる動きなどを取り入れ、ブランドの世界観と操作体験に一貫性を持たせています。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## UXで工夫したこと
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+目的や季節に合った商品を選びやすくするため、商品を以下の3カテゴリーに分けました。
 
-## Deploy on Vercel
+- ベーシック
+- 夏用
+- 冬用
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+商品の一覧性を保ちながら選択肢を整理することで、ユーザーが迷わず目的の商品へたどり着ける構成を目指しています。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 振り返り
+
+### 生成AIによるコンセプト設計の可能性と注意点
+
+Stitchは商品の特徴を伝えるだけで、デザインコンセプトの提案や画像生成まで行えるため、アイデアを素早く形にするうえで非常に便利でした。
+
+一方で、生成された提案に自身の考えが引っ張られ、本来考えるべきUI・UXの目的を見失うおそれもあります。生成結果をそのまま採用するのではなく、ユーザーにとって適切な体験になっているかを自分で判断することが重要だと学びました。
+
+### 共通言語としてのUI用語
+
+「ヒーロー」や「モーダル」などのUI用語を理解していると、生成AIへ意図を正確かつ簡潔に伝えられます。
+
+適切な用語が分からない場合でも、スクリーンショットを示して修正したい箇所と内容を具体的に伝えることで、認識を合わせられることが分かりました。
+
+### 感覚的な表現と数値指定
+
+アニメーションの速度を「ゆっくりめ」「徐々に速く」といった自然言語だけで指示すると、意図した動きにならないことがありました。
+
+細かな調整では具体的な数値を指定することに加え、調整対象の値をコード上で分かりやすい変数にしてもらうなど、人が確認・修正しやすい実装を生成AIへ依頼する必要があります。
+
+## この制作を通して得たこと
+
+- 生成AIを活用し、コンセプト設計から実装まで一貫して進める経験
+- ブランドの特徴をデザインやアニメーションへ落とし込む視点
+- 商品を選びやすくするための情報設計
+- 生成AIへ意図を伝えるための、具体的な指示と共通言語の重要性
+- 生成結果を鵜呑みにせず、UI・UXの目的に照らして判断する姿勢
